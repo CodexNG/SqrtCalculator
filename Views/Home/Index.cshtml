@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Square Root Calculator";
+}
+
+<header>
+  <h1 class="text-center">@ViewData["Title"]</h1>
+</header>
+<hr>
+<main style="width:450px;max-width:100%;margin:0 auto;">
+  <div>
+    <p>This program takes in two numbers and returns which has a bigger square root</p>
+  </div>
+  <div class="text-center">
+    @{
+      if (ViewBag.Error == "not string")
+      {
+        <p class="alert alert-danger" role="alert">Error: You entered values that are not numbers. Try again</p>
+      }
+      if (ViewBag.Error == "negative number") 
+      {
+        <p class="alert alert-danger" role="alert">Error: You are not allowed to enter negative numbers. Try again</p>
+      }
+      if (ViewBag.Error == "equal root")
+      {
+        <p class="alert alert-danger" role="alert">Error: The numbers have equal square roots. Please enter another value</p>
+      }
+      if (ViewBag.HigherNum != null)
+      {
+        <p class="alert alert-success" role="alert">
+          The number @ViewBag.HigherNum with square root @ViewBag.HigherRoot has a higher square root than the number 
+          @ViewBag.LowerNum with square root @ViewBag.LowerRoot
+        </p>
+      }
+
+    }
+  </div>
+  <div>
+    <form asp-controller="Home" asp_action="Index" method="post">
+      <div class="form-group">
+        <label for="first_number">Enter First Number</label>
+        <input type="text" class="form-control" name="firstNumber" id="first_number" placeholder="Enter first number" required>
+      </div>
+      <div class="form-group">
+        <label for="second_number">Enter Second Number</label>
+        <input type="text" class="form-control" name="secondNumber" id="second_number" placeholder="Enter second number" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
+  </div>
+</main>
+
